@@ -2,13 +2,17 @@ package oop.상속;
 
 import java.sql.Timestamp;
 
-public class Employee {
+public class Employee extends Object{
     private String name;
     private int age;
     private String phone;
-    private Timestamp empDate;
+    private String empDate;
     private String dept;
     private boolean marriage;
+
+    public Employee() {
+        super(); // 상위 클래스의 생성자를 호출 하는 것이다.
+    }
 
     public String getName() {
         return name;
@@ -34,11 +38,11 @@ public class Employee {
         this.phone = phone;
     }
 
-    public Timestamp getEmpDate() {
+    public String getEmpDate() {
         return empDate;
     }
 
-    public void setEmpDate(Timestamp empDate) {
+    public void setEmpDate(String empDate) {
         this.empDate = empDate;
     }
 
@@ -55,6 +59,15 @@ public class Employee {
     }
 
     public void setMarriage(boolean marriage) {
+        this.marriage = marriage;
+    }
+
+    public Employee(String name, int age, String phone, String empDate, String dept, boolean marriage) {
+        this.name = name;
+        this.age = age;
+        this.phone = phone;
+        this.empDate = empDate;
+        this.dept = dept;
         this.marriage = marriage;
     }
 
