@@ -18,6 +18,7 @@ public class RestApiController {
         return html;
     }
 
+    // PathVariable로 전달하기.
     @GetMapping( "/echo/{message}/age/{age}/is-man/{isMan}")
     public String echo(
             @PathVariable("message") String message,
