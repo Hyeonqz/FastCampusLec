@@ -1,9 +1,0 @@
-{
-  "key": "value",
-  "array" : [
-    10,20,30,40,50
-  ],
-  "string-array" : [
-    "abc","cde","hij"
-  ]
-}

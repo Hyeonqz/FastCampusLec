@@ -15,4 +15,12 @@ public class UserRequestDTO {
     private Integer userAge;
     private String email;
     private Boolean iskorean;
+
+    public String name() {
+        return this.userName;
+    }
+
+    public Integer age() {
+        return this.userAge;
+    }
 }

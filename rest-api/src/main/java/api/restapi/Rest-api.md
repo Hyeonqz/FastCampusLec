@@ -15,3 +15,26 @@ get방식은 url에 다 보이지만, post는 외부 주소에 데이터가 보�
 그러므로 get방식 보다는 안전하다. 
 
 post방식은 파라미터값으로 받을때 객체를 받아야한다.
+
+
+### slf4j
+
+로그는 자체적으로 버퍼를 가지고 있기 때문에 system.out 보다 효율이 좋다<br>
+
+
+스프링부트는 기본적으로 Jackson 라이브러리를 사용해서<br>
+엔티티를 JSON으로 바꿔줍니다
+#### Jackson 동작과정
+
+ObjectMapper는 변수에 매칭되는게 아닌 get() 메소드에 매핑이 된다<br>
+getName -> Name에 매핑이 된다
+
+Json 값으로 사용하지 않겠다?<br>
+**`@JsonIgnore`**
+
+
+
+
+
+
+
