@@ -6,8 +6,10 @@ import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import spring.annotation.PhoneNumber;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -19,6 +21,8 @@ public class UserRegister {
     //@NotEmpty // != null && name != "" && name != " " 공백이 있는것도 안됌
     @NotBlank // != null && name != ""
     private String name;
+
+    private String nickName;
 
     @Size(min=1, max=12)
     @NotBlank
@@ -32,9 +36,23 @@ public class UserRegister {
     @Email
     private String email;
 
-    @Pattern(regexp = "^\\d{2,3}(?:-|\\s)?\\d{3,4}(?:-|\\s)?\\d{4}$", message = "휴대폰 번호 양식에 맞지 않습니다.") //휴대폰 번호 정규식
+    @PhoneNumber
     private String phoneNumber;
 
     @FutureOrPresent
     private LocalDateTime registerAt;
+
+    @AssertTrue(message = "name or nickName은 1개는 존재해야 합니다.") //is가 들어간 boolean 반환에만 작동함
+    public boolean isNameCheck() {
+
+        if(Objects.nonNull(name) && !name.isBlank()) {
+            return true;
+        }
+
+        if(Objects.nonNull(nickName) && !nickName.isBlank()) {
+            return true;
+        }
+
+        return false;
+    }
 }
