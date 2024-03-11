@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import spring.annotation.PhoneNumber;
+import spring.annotation.YearMonth;
 
 import java.time.LocalDateTime;
 import java.util.Objects;
@@ -41,6 +42,9 @@ public class UserRegister {
 
     @FutureOrPresent
     private LocalDateTime registerAt;
+
+    @YearMonth(pattern = "yyyy-MM")
+    private String birthDayYearMonth;
 
     @AssertTrue(message = "name or nickName은 1개는 존재해야 합니다.") //is가 들어간 boolean 반환에만 작동함
     public boolean isNameCheck() {
