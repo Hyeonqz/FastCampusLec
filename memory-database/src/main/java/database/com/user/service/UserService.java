@@ -30,4 +30,8 @@ public class UserService {
     public Optional<UserEntity> findById(Long id) {
         return userRepository.findById(id);
     }
+
+    public List<UserEntity> filterScore(int score) {
+        return userRepository.findAllScoreGreaterThen(score);
+    }
 }

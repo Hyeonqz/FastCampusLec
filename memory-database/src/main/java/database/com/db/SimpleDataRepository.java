@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 abstract public class SimpleDataRepository<T extends Entity, ID extends Long> implements DataRepository<T,ID> {
     // 제네릭 타입은 Entity를 상속받은 것만 들어옴.
     private List<T> dataList = new ArrayList<>();
-    private static long index = 0;
+    private static long index = 1;
 
     private Comparator<T> sorting = new Comparator<T>() {
         @Override
