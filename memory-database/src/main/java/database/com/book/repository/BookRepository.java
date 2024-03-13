@@ -1,9 +1,8 @@
 package database.com.book.repository;
 
 import database.com.book.entity.BookEntity;
-import database.com.db.SimpleDataRepository;
-import org.springframework.stereotype.Repository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-@Repository
-public class BookRepository extends SimpleDataRepository<BookEntity,Long> {
+public interface BookRepository extends JpaRepository<BookEntity,Long> {
+
 }

@@ -33,12 +33,22 @@ public class UserApiController {
 
     @DeleteMapping("/delete/{id}")
     public void delete(@PathVariable Long id) {
-        userService.delete(id);
+        //userService.delete(id);
     }
 
     @GetMapping("/")
     public List<UserEntity> filterScore (@RequestParam int score) {
         return userService.filterScore(score);
+    }
+
+    @GetMapping("/minmax")
+    public List<UserEntity> filterScore(@RequestParam int min, @RequestParam int max) {
+        return userService.filterScore(min,max);
+    }
+
+    @GetMapping("/mmax")
+    public List<UserEntity> score(@RequestParam int min, @RequestParam int max) {
+        return userService.filter(min,max);
     }
 
 }
