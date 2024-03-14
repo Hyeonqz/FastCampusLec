@@ -1,0 +1,10 @@
+package board.simpleboard.reply.repository;
+
+import board.simpleboard.reply.db.ReplyEntity;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import java.util.List;
+
+public interface ReplyRepository extends JpaRepository<ReplyEntity,Long> {
+    List<ReplyEntity> findAllByPostIdAndStatusOrderByIdDesc(Long postId, String status);
+}
