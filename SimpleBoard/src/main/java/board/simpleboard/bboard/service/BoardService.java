@@ -27,8 +27,8 @@ public class BoardService {
     }
 
     public BoardDto view(Long id) {
-        var entity = boardRepository.findById(id).get();
+        var entity = boardRepository.findById(id);
 
-         return boardConverter.toDto(entity);
+         return boardConverter.toDto(entity.get());
     }
 }

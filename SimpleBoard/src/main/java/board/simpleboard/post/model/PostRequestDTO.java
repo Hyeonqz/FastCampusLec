@@ -15,6 +15,8 @@ import lombok.*;
 @JsonNaming(value = PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class PostRequestDTO {
 
+    private Long boardId = 1L;
+
     @NotBlank
     private String userName;
 

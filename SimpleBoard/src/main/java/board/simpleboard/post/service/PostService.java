@@ -1,11 +1,15 @@
 package board.simpleboard.post.service;
 
+import board.simpleboard.bboard.repository.BoardRepository;
+import board.simpleboard.common.Api;
+import board.simpleboard.common.Pagination;
 import board.simpleboard.post.db.PostEntity;
 import board.simpleboard.post.model.PostRequestDTO;
 import board.simpleboard.post.model.PostViewRequest;
 import board.simpleboard.post.repository.PostRepository;
 import board.simpleboard.reply.service.ReplyService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -15,11 +19,14 @@ import java.util.List;
 @Service
 public class PostService {
     private final PostRepository postRepository;
+    private final BoardRepository boardRepository;
     private final ReplyService replyService;
 
     public PostEntity create(PostRequestDTO postRequestDTO) {
+
+        var boardEntity = boardRepository.findById(postRequestDTO.getBoardId());
         var entity = PostEntity.builder()
-                .boardId(1L)
+                .board(boardEntity.get())
                 .userName(postRequestDTO.getUserName())
                 .password(postRequestDTO.getPassword())
                 .email(postRequestDTO.getEmail())
@@ -39,11 +46,8 @@ public class PostService {
                         var format = "패스워드가 맞지 않습니다 기존 : %s vs 입력 : %s";
                         throw new RuntimeException(String.format(format,it.getPassword(), postViewRequest.getPassword()));
                     }
-
-                    var replyList = replyService.findAllByPostId(it.getId());
-                    it.setReplyList(replyList);
-
                     return it;
+
                 }).orElseThrow(
                         () -> {
                             return new RuntimeException("해당 게시글이 존재하지 않습니다. : " + postViewRequest.getPostId());
@@ -52,8 +56,24 @@ public class PostService {
         // 비밀번호가 맞는가?
     }
 
-    public List<PostEntity> all() {
-        return postRepository.findAll();
+    public Api<List<PostEntity>> all(Pageable pageable) {
+        var list = postRepository.findAll(pageable);
+
+        var pagination = Pagination.builder()
+                .page(list.getNumber())
+                .size(list.getSize())
+                .currentElements(list.getNumberOfElements())
+                .totalElements(list.getTotalElements())
+                .totalPage(list.getTotalPages())
+                .build();
+
+        var response = Api.<List<PostEntity>>builder()
+                .body(list.toList())
+                .pagination(pagination)
+                .build();
+
+
+        return response;
     }
 
     public void delete(PostViewRequest postViewRequest) {

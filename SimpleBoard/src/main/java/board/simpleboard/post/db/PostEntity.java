@@ -39,7 +39,9 @@ public class PostEntity {
     private String content;
     private LocalDateTime postedAt;
 
-    @Transient //이것은 column 으로 쓰지 않겠다는 뜻
+    // @Transient //이것은 column 으로 쓰지 않겠다는 뜻
+    @OneToMany(mappedBy = "post")
+    @Builder.Default
     private List<ReplyEntity> replyList = List.of();
 
 }
