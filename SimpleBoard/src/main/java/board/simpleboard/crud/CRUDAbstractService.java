@@ -5,7 +5,6 @@ import board.simpleboard.common.Pagination;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
@@ -45,7 +44,7 @@ public abstract class CRUDAbstractService<DTO,ENTITY> implements CRUDInterface<D
 
         var dto = optionalEntity.map(
                 it -> {
-                    converter.toDto(it);
+                    return converter.toDto(it);
                 }
         ).orElseGet( () -> null);
 

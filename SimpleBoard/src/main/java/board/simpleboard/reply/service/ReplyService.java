@@ -1,8 +1,9 @@
 package board.simpleboard.reply.service;
 
-import board.simpleboard.post.db.PostEntity;
+import board.simpleboard.crud.CRUDAbstractService;
 import board.simpleboard.post.repository.PostRepository;
 import board.simpleboard.reply.db.ReplyEntity;
+import board.simpleboard.reply.model.ReplyDto;
 import board.simpleboard.reply.model.ReplyRequest;
 import board.simpleboard.reply.repository.ReplyRepository;
 import lombok.RequiredArgsConstructor;
@@ -13,7 +14,7 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @Service
-public class ReplyService {
+public class ReplyService extends CRUDAbstractService<ReplyDto, ReplyEntity> {
     private final ReplyRepository repository;
     private final PostRepository postRepository;
 
