@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 import java.util.Optional;
 
-@RequestMapping("/api/reply")
 @RequiredArgsConstructor
 @RestController
 public class ReplyApiController extends CrudApiAbstractController<ReplyDto, ReplyEntity> {
