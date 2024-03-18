@@ -3,14 +3,14 @@ package session.authentication.session.service;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import session.authentication.session.dto.LoginRequest;
-import session.authentication.session.repository.UserRepository;
+import session.authentication.cookie.model.LoginRequest;
+import session.authentication.cookie.db.CuserRepository;
 
 @RequiredArgsConstructor
 @Service
 public class UserService {
+    private final CuserRepository userRepository;
 
-    private final UserRepository userRepository;
 
     public void login (LoginRequest loginRequest, HttpSession httpSession) {
         var id = loginRequest.getId();
