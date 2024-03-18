@@ -4,10 +4,7 @@ import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.CookieValue;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import session.authentication.cookie.db.CuserRepository;
 import session.authentication.cookie.model.UserDto;
 
@@ -41,5 +38,13 @@ public class UserCookieController {
         var userDto = cuserRepository.findById(authorizationCookie);
 
         return userDto.get(); //Json 값으로 가져오기
+    }
+
+    @GetMapping("/me3")
+    public UserDto me3(@RequestHeader(name="authorization", required = false) String authorizationHeader) {
+        log.info("authorizationHeader : {}", authorizationHeader);
+
+        var optionalUserDto = cuserRepository.findById(authorizationHeader);
+        return optionalUserDto.get();
     }
 }
