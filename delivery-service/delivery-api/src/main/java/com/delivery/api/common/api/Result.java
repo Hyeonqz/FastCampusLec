@@ -31,7 +31,7 @@ public class Result {
         var result = Result.builder()
                 .resultCode(errorCodeIfs.getErrorCode())
                 .resultMessage(errorCodeIfs.getDescription())
-                .resultDescription("성공")
+                .resultDescription("에러발생")
                 .build();
 
         return result;
