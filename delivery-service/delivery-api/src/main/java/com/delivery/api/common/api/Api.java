@@ -1,22 +1,22 @@
 package com.delivery.api.common.api;
 
-import com.delivery.api.common.error.ErrorCodeInterface;
+import com.delivery.api.common.error.ErrorCodeIfs;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@AllArgsConstructor
-@NoArgsConstructor
 @Data
-public class Api<T> { // 원하는 데이터를 넣기 위해서 제네릭 타입으로 클래스를 설정한다.
-
-    private Result result;
+@NoArgsConstructor
+@AllArgsConstructor
+public class Api<T> {
 
     @Valid
     private T body;
 
-    public static <T> Api<Object> ok(T data) {
+    private Result result;
+
+    public static <T> Api<T> OK(T data) {
         var api = new Api();
         api.result = Result.OK();
         api.body = data;
@@ -29,22 +29,23 @@ public class Api<T> { // 원하는 데이터를 넣기 위해서 제네릭 타�
         return api;
     }
 
-    public static Api<Object> ERROR(ErrorCodeInterface errorCodeInterface) {
+    public static Api<Object> ERROR_CODE(ErrorCodeIfs errorCodeIfs) {
         var api = new Api<Object>();
-        api.result = Result.ERROR(errorCodeInterface);
+        api.result = Result.ERROR(errorCodeIfs);
         return api;
     }
 
-    public static Api<Object> ERROR(ErrorCodeInterface errorCodeInterface, Throwable tx) {
+    public static Api<Object> ERROR (ErrorCodeIfs errorCodeIfs, Throwable tx) {
         var api = new Api<Object>();
-        api.result = Result.ERROR(errorCodeInterface,tx);
+        api.result = Result.ERROR(errorCodeIfs,tx);
         return api;
     }
 
-    public static Api<Object> ERROR(ErrorCodeInterface errorCodeInterface, String description) {
+    public static Api<Object> ERROR (ErrorCodeIfs errorCodeIfs, String description) {
         var api = new Api<Object>();
-        api.result = Result.ERROR(errorCodeInterface,description);
+        api.result = Result.ERROR(errorCodeIfs,description);
         return api;
     }
+
 
 }

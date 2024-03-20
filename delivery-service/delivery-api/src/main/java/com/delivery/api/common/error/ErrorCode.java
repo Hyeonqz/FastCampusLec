@@ -5,20 +5,21 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 
 @AllArgsConstructor
-public enum ErrorCode implements ErrorCodeInterface{
-    OK(200, 200, "성공이야"),
-    BAD_REQUEST(HttpStatus.BAD_REQUEST.value(), 400, "잘못된 요청"),
-    SERVER_ERROR(HttpStatus.INTERNAL_SERVER_ERROR.value(), 500, "서버 에러"),
-    NULL_POINT(HttpStatus.INTERNAL_SERVER_ERROR.value(), 512, "NullPoint")
+public enum ErrorCode implements ErrorCodeIfs{
+
+    OK(200, 200, "성공"),
+    BAT_REQUEST(HttpStatus.BAD_REQUEST.value(), 400, "잘못된 요청"),
+    SERVER_ERROR(HttpStatus.INTERNAL_SERVER_ERROR.value(), 500, "서버에러" ),
+    NPE_ERROR(HttpStatus.INTERNAL_SERVER_ERROR.value(), 512, "Null point")
     ;
 
-    private final Integer httpStatusCode;
+    private final Integer httStatusCode;
     private final Integer errorCode;
     private final String description;
 
     @Override
     public Integer getHttpStatusCode() {
-        return this.httpStatusCode;
+        return this.httStatusCode;
     }
 
     @Override
