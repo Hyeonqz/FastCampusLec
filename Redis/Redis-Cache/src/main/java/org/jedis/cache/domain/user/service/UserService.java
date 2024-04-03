@@ -6,6 +6,7 @@ import org.jedis.cache.domain.user.entity.RedisHashUser;
 import org.jedis.cache.domain.user.entity.User;
 import org.jedis.cache.domain.user.repository.RedisHashUserRepository;
 import org.jedis.cache.domain.user.repository.UserRepository;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
@@ -49,6 +50,11 @@ public class UserService {
 		});
 		return cachedUser;
 		// 없으면 DB 값을 활용합니다.
+	}
+
+	@Cacheable(cacheNames = "CACHE1", key="'user:' + #id")
+	public User getUser3(final Long id) {
+		return userRepository.findById(id).orElseThrow();
 	}
 
 

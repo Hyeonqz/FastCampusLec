@@ -1,5 +1,6 @@
 package org.jedis.cache.domain.user.entity;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 import org.springframework.data.annotation.CreatedDate;
@@ -23,7 +24,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @EntityListeners(value = AuditingEntityListener.class)
 @Entity
-public class User {
+public class User implements Serializable {
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
