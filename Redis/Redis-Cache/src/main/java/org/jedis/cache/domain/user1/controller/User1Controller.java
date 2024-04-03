@@ -1,9 +1,7 @@
-package org.jedis.cache.user.controller;
+package org.jedis.cache.domain.user1.controller;
 
-import java.util.Optional;
-
-import org.jedis.cache.user.User;
-import org.jedis.cache.user.UserRepository;
+import org.jedis.cache.domain.user1.User1;
+import org.jedis.cache.domain.user1.User1Repository;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
@@ -14,8 +12,8 @@ import redis.clients.jedis.JedisPool;
 
 @RequiredArgsConstructor
 @RestController
-public class UserController {
-	private final UserRepository userRepository;
+public class User1Controller {
+	private final User1Repository user1Repository;
 	private final JedisPool jedisPool;
 
 
@@ -32,7 +30,7 @@ public class UserController {
 			}
 			// 2. else db
 			else {
-				useEmail = userRepository.findById(id).orElse(User.builder().build()).getEmail();
+				useEmail = user1Repository.findById(id).orElse(User1.builder().build()).getEmail();
 			}
 			// 3. cache
 			jedis.set(userEmailRedisKey, useEmail);

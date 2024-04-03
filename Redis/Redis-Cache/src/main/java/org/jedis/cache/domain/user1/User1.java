@@ -1,8 +1,7 @@
-package org.jedis.cache.user;
+package org.jedis.cache.domain.user1;
 
 import java.time.LocalDateTime;
 
-import org.springframework.context.event.EventListener;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -24,7 +23,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @EntityListeners(AuditingEntityListener.class) //테이블 필드가 생성될 떄 자동으로 값이 들어간다. 필드가 갱신되면 같이 갱신이 됩니다.
 @Entity
-public class User {
+public class User1 {
 
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
