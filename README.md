@@ -60,8 +60,4 @@
 
 <br><hr><br>
 
-### 현실 세상의 컴퓨터공학 지식 
-<br>
-
-> Computer Science
    
