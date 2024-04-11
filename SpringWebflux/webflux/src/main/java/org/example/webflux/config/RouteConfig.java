@@ -1,6 +1,6 @@
 package org.example.webflux.config;
 
-import org.example.webflux.SampleHandler;
+import org.example.webflux.sample.SampleHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.reactive.function.server.RouterFunction;

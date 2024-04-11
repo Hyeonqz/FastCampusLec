@@ -1,4 +1,4 @@
-package org.example.webflux.controller;
+package org.example.webflux.sample;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;

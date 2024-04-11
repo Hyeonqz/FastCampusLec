@@ -40,7 +40,7 @@ public class UserRepositoryImpl implements UserRepository{
 	}
 
 	@Override
-	public Mono<Integer> delete (Long id) {
+	public Mono<Integer> deleteById (Long id) {
 		User user = userHashMap.getOrDefault(id, null);
 		if (user==null) {
 			return Mono.just(0);

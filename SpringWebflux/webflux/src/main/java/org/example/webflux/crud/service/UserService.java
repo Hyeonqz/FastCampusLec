@@ -1,6 +1,7 @@
 package org.example.webflux.crud.service;
 
 import org.example.webflux.crud.domain.User;
+import org.example.webflux.crud.repository.UserR2dbcRepository;
 import org.example.webflux.crud.repository.UserRepositoryImpl;
 import org.springframework.stereotype.Service;
 
@@ -11,11 +12,12 @@ import reactor.core.publisher.Mono;
 @RequiredArgsConstructor
 @Service
 public class UserService {
-	private final UserRepositoryImpl userRepository;
+	// private final UserRepositoryImpl userRepository;
+	private final UserR2dbcRepository userR2dbcRepository;
 
 	// create
 	public Mono<User> create(String name, String email) {
-		return userRepository.save(User.builder()
+		return userR2dbcRepository.save(User.builder()
 			.name(name)
 			.email(email)
 			.build());
@@ -25,25 +27,25 @@ public class UserService {
 	public Mono<User> update(Long id, String name, String email) {
 		// 1번 : 해당 사용자를 찾는다.
 		// 2번 : 데이터를 변경하고 저장한다.
-		return userRepository.findById(id)
+		return userR2dbcRepository.findById(id)
 			.flatMap( u-> {
 				u.setName(name);
 				u.setEmail(email);
-				return userRepository.save(u);
+				return userR2dbcRepository.save(u);
 			});
 	}
 
 	// delete
-	public Mono<Integer> deleteById(Long id) {
-		return userRepository.delete(id);
+	public Mono<Void> deleteById(Long id) {
+		return userR2dbcRepository.deleteById(id);
 	}
 
 	// read
 	public Flux<User> findAll() {
-		return userRepository.findAll();
+		return userR2dbcRepository.findAll();
 	}
 
 	public Mono<User> findById(Long id) {
-		return userRepository.findById(id);
+		return userR2dbcRepository.findById(id);
 	}
 }
