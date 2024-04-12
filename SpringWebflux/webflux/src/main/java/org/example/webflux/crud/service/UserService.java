@@ -2,6 +2,7 @@ package org.example.webflux.crud.service;
 
 import org.example.webflux.crud.domain.entity.User;
 import org.example.webflux.crud.repository.UserR2dbcRepository;
+import org.springframework.data.redis.core.ReactiveRedisTemplate;
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
@@ -14,12 +15,27 @@ public class UserService {
 	// private final UserRepositoryImpl userRepository;
 	private final UserR2dbcRepository userR2dbcRepository;
 
+	private final ReactiveRedisTemplate<String, User> reactiveRedisTemplate;
+
 	// create
 	public Mono<User> create(String name, String email) {
 		return userR2dbcRepository.save(User.builder()
 			.name(name)
 			.email(email)
 			.build());
+	}
+
+	private String getUserCacheKey(Long id) {
+		return "users:%d".formatted(id);
+	}
+
+	public Mono<User> findById(Long id) {
+		return reactiveRedisTemplate.opsForValue()
+			.get("users:%d".formatted(id))
+			.switchIfEmpty(userR2dbcRepository.findById(id))
+			.flatMap(u -> reactiveRedisTemplate.opsForValue().set(getUserCacheKey(id),u)
+			.then(Mono.just(u))
+			);
 	}
 
 	// update
@@ -48,7 +64,7 @@ public class UserService {
 		return userR2dbcRepository.findAll();
 	}
 
-	public Mono<User> findById(Long id) {
+/*	public Mono<User> findById(Long id) {
 		return userR2dbcRepository.findById(id);
-	}
+	}*/
 }
