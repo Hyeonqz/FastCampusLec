@@ -20,7 +20,7 @@ public class PostCustomR2dbcRepositoryImpl implements PostCustomR2dbcRepository{
   					select ...  
   					from posts p LEFT JOIN users u ON p.user_id = u.id where p.user_id = :userId
   					""";
-		return databaseClient.sql(sql)
+	/*	return databaseClient.sql(sql)
 			.bind("userId", userId)
 			.fetch()
 			.all()
@@ -36,8 +36,8 @@ public class PostCustomR2dbcRepositoryImpl implements PostCustomR2dbcRepository{
 					.createdAt(row.get("uCreateAt")))
 					.build()
 				)
-			.build());
-
+			.build());*/
+		return null;
 	}
 
 }
