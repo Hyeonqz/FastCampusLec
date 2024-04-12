@@ -28,7 +28,7 @@ public class UserController {
 	private final UserService userService;
 	private final PostServiceV2 postServiceV2;
 
-	//crud
+/*	//crud
 	@PostMapping("/create")
 	public Mono<UserResponse> createUser(@RequestBody UserCreateRequest userCreateRequest) {
 		return userService.create(userCreateRequest.getName(), userCreateRequest.getEmail())
@@ -73,5 +73,5 @@ public class UserController {
 	public Flux<UserPostResponse> getUserPosts(@PathVariable Long id) {
 		return postServiceV2.findAllByUserId(id)
 			.map(UserPostResponse::of);
-	}
+	}*/
 }
