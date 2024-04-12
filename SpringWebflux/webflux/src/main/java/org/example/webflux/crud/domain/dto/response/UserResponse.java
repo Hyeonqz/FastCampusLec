@@ -2,7 +2,7 @@ package org.example.webflux.crud.domain.dto.response;
 
 import java.time.LocalDateTime;
 
-import org.example.webflux.crud.domain.User;
+import org.example.webflux.crud.domain.entity.User;
 
 import lombok.Builder;
 import lombok.Data;

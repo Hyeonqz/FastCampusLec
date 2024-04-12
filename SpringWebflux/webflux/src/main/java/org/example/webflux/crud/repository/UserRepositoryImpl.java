@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicLong;
 
-import org.example.webflux.crud.domain.User;
+import org.example.webflux.crud.domain.entity.User;
 import org.springframework.stereotype.Repository;
 
 import reactor.core.publisher.Flux;

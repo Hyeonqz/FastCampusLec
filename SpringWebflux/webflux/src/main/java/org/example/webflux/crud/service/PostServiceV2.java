@@ -1,6 +1,6 @@
 package org.example.webflux.crud.service;
 
-import org.example.webflux.crud.domain.Post;
+import org.example.webflux.crud.domain.entity.Post;
 import org.example.webflux.crud.repository.PostR2dbcRepository;
 import org.springframework.stereotype.Service;
 
@@ -37,4 +37,7 @@ public class PostServiceV2 {
 	}
 
 	// update
+	public Flux<Post> findAllByUserId(Long userId) {
+		return postR2dbcRepository.findByUserId(userId);
+	}
 }

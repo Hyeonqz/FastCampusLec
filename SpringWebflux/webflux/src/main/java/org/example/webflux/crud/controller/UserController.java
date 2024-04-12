@@ -1,9 +1,10 @@
 package org.example.webflux.crud.controller;
 
-import org.example.webflux.crud.domain.User;
-import org.example.webflux.crud.domain.dto.UserCreateRequest;
-import org.example.webflux.crud.domain.dto.UserUpdateRequest;
+import org.example.webflux.crud.domain.dto.request.UserCreateRequest;
+import org.example.webflux.crud.domain.dto.request.UserUpdateRequest;
+import org.example.webflux.crud.domain.dto.response.UserPostResponse;
 import org.example.webflux.crud.domain.dto.response.UserResponse;
+import org.example.webflux.crud.service.PostServiceV2;
 import org.example.webflux.crud.service.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import lombok.RequiredArgsConstructor;
@@ -24,6 +26,7 @@ import reactor.core.publisher.Mono;
 @RestController
 public class UserController {
 	private final UserService userService;
+	private final PostServiceV2 postServiceV2;
 
 	//crud
 	@PostMapping("/create")
@@ -32,7 +35,7 @@ public class UserController {
 			.map(UserResponse::of);
 	}
 
-	@GetMapping("/find")
+	@GetMapping("")
 	public Flux<UserResponse> findAllUsers() {
 		return userService.findAll()
 			.map(UserResponse::of);
@@ -61,4 +64,14 @@ public class UserController {
 			.switchIfEmpty(Mono.just(ResponseEntity.notFound().build()));
 	}
 
+	@DeleteMapping("/search")
+	public Mono<ResponseEntity<?>> deleteUser(@RequestParam String name) {
+		return userService.deleteByName(name).then(Mono.just(ResponseEntity.noContent().build()));
+	}
+
+	@GetMapping("/{id}/posts")
+	public Flux<UserPostResponse> getUserPosts(@PathVariable Long id) {
+		return postServiceV2.findAllByUserId(id)
+			.map(UserPostResponse::of);
+	}
 }

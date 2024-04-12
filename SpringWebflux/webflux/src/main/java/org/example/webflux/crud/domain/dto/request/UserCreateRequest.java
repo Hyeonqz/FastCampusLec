@@ -1,15 +1,15 @@
-package org.example.webflux.crud.domain.dto;
-
-import java.time.LocalDateTime;
+package org.example.webflux.crud.domain.dto.request;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@NoArgsConstructor
+@Builder
 @AllArgsConstructor
+@NoArgsConstructor
 @Data
-public class UserUpdateRequest {
+public class UserCreateRequest {
 
 	private String name;
 	private String email;

@@ -5,8 +5,8 @@ import static org.mockito.Mockito.*;
 
 import java.time.LocalDateTime;
 
-import org.example.webflux.crud.domain.User;
-import org.example.webflux.crud.domain.dto.UserCreateRequest;
+import org.example.webflux.crud.domain.entity.User;
+import org.example.webflux.crud.domain.dto.request.UserCreateRequest;
 import org.example.webflux.crud.domain.dto.response.UserResponse;
 import org.example.webflux.crud.service.UserService;
 import org.junit.jupiter.api.Test;

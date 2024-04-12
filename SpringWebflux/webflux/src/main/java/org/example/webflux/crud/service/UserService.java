@@ -1,8 +1,7 @@
 package org.example.webflux.crud.service;
 
-import org.example.webflux.crud.domain.User;
+import org.example.webflux.crud.domain.entity.User;
 import org.example.webflux.crud.repository.UserR2dbcRepository;
-import org.example.webflux.crud.repository.UserRepositoryImpl;
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
@@ -38,6 +37,10 @@ public class UserService {
 	// delete
 	public Mono<Void> deleteById(Long id) {
 		return userR2dbcRepository.deleteById(id);
+	}
+
+	public Mono<Void> deleteByName(String name) {
+		return userR2dbcRepository.deleteByName(name);
 	}
 
 	// read

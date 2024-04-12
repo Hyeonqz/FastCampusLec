@@ -1,7 +1,6 @@
 package org.example.webflux.crud.controller;
 
-import org.example.webflux.crud.domain.dto.PostCreateRequest;
-import org.example.webflux.crud.domain.dto.response.PostResponse;
+import org.example.webflux.crud.domain.dto.request.PostCreateRequest;
 import org.example.webflux.crud.domain.dto.response.PostResponseV2;
 import org.example.webflux.crud.service.PostServiceV2;
 import org.springframework.http.ResponseEntity;

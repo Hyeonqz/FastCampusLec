@@ -1,4 +1,4 @@
-package org.example.webflux.crud.domain.dto;
+package org.example.webflux.crud.domain.dto.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
