@@ -1,0 +1,16 @@
+server:
+  port: 9000
+
+logging:
+  level:
+    root: info
+
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/target
+    username: root
+    password: fastcampus
+  data:
+    redis:
+      host: localhost
+      port: 6379
