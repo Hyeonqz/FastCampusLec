@@ -3,6 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/SpringWebflux.iml" filepath="$PROJECT_DIR$/.idea/SpringWebflux.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/flow.main.iml" filepath="$PROJECT_DIR$/.idea/modules/flow.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/mvc.main.iml" filepath="$PROJECT_DIR$/.idea/modules/mvc.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/webflux.main.iml" filepath="$PROJECT_DIR$/.idea/modules/webflux.main.iml" />
     </modules>
   </component>
 </project>
