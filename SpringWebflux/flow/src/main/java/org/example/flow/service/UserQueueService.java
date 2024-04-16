@@ -53,6 +53,13 @@ public class UserQueueService {
 			.map(rank -> rank >=0);
 	}
 
+	// 대기번호 체크
+	public Mono<Long> getRank(final String queue, final Long userId) {
+		return reactiveRedisTemplate.opsForZSet().rank(USER_QUEUE_WAIT_KEY.formatted(queue), userId.toString())
+			.defaultIfEmpty(-1L)
+			.map(rank -> rank >= 0 ? rank+1 : rank); // 0부터 아닌 첫번째 대기자 부터 하기 위해 +1 을 해줌
+	}
+
 
 
 }

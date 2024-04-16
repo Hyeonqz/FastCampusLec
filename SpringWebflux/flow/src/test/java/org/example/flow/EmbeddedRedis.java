@@ -22,7 +22,6 @@ public class EmbeddedRedis {
 	}
 
 	// Embedded Redis server 종료
-	@PostConstruct
 	public void stop() throws IOException {
 		this.redisServer.stop();
 	}
