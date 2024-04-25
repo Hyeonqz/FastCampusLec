@@ -1,5 +1,6 @@
 package org.example.api.config.swagger;
 
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -17,5 +18,4 @@ public class SwaggerConfig {
 		// 현업에서는 보안 설정까지 하지만, 토이 프로젝트니 이정도만 하는걸로.
 		return new ModelResolver(objectMapper);
 	}
-
 }
