@@ -30,6 +30,12 @@ public class UseOpenApiController {
 		return Api.OK(response);
 	}
 
+	// 로그인
+	@PostMapping("/login")
+	public Api<UserResponse> isLogin (@Valid @RequestBody Api<UserLoginRequest> request) {
 
+		var response = userBusiness.login(request.getBody());
+		return Api.OK(response);
+	}
 
 }

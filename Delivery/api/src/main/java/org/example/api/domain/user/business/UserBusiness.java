@@ -43,6 +43,17 @@ public class UserBusiness {
 			.map(userConverter::toResponse) // toResponse 로 변환
 			.orElseThrow(() -> new ApiException(ErrorCode.NULL_POINT, "Request Null"));
 	}
-
+	/*
+	* 1. email, password 를 가지고 사용자 체크
+	* 2. user entity 로그인 확인
+	* 3. 로그인 완료시 토큰 생성
+	* 4. token response
+	* */
+	public UserResponse login (UserLoginRequest request) {
+		UserEntity userEntity = userService.login(request.getEmail(), request.getPassword());
+		// 위 로직에서 사용자가 없으면 throw
+		// 사용자가 있다면 토큰을 생성 시킨다.
+		return userConverter.toResponse(userEntity);
+	}
 
 }
