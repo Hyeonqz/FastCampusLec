@@ -2,9 +2,11 @@ package org.example.api.domain.user.controller;
 
 import java.util.Objects;
 
+import org.example.api.common.annotation.UserSession;
 import org.example.api.common.api.Api;
 import org.example.api.domain.user.business.UserBusiness;
 import org.example.api.domain.user.controller.model.res.UserResponse;
+import org.example.api.domain.user.model.User;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,10 +23,9 @@ public class UserApiController {
 	private final UserBusiness userBusiness;
 
 	@GetMapping("/me")
-	public Api<UserResponse> me() {
-		var requestContext = Objects.requireNonNull(RequestContextHolder.getRequestAttributes());
-		var userID = requestContext.getAttribute("userId", RequestAttributes.SCOPE_REQUEST);
-		var response = userBusiness.me(Long.parseLong(userID.toString()));
+	public Api<UserResponse> me(@UserSession User user) { // AOP 방식으로 진행을 함.
+
+		var response = userBusiness.me(user.getId());
 		return Api.OK(response);
 	}
 }
