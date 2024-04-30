@@ -1,8 +1,9 @@
 package org.example.api.common.exception;
 
-import org.example.api.common.error.ErrorCodeInterface;
+import org.example.api.common.error.ErrorCodeIfs;
 
 public interface ApiExceptionIfs {
-	ErrorCodeInterface getErrorCodeIfs();
-	String getErrorDescription();
+
+    ErrorCodeIfs getErrorCodeIfs();
+    String getErrorDescription();
 }

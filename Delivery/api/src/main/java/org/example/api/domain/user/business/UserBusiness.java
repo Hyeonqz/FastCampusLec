@@ -4,12 +4,14 @@ import java.util.Optional;
 
 import org.example.api.common.annotation.Business;
 import org.example.api.common.error.ErrorCode;
+import org.example.api.common.exception.ApiException;
+import org.example.api.domain.token.business.TokenBusiness;
+import org.example.api.domain.token.controller.model.TokenResponse;
 import org.example.api.domain.user.controller.model.req.UserLoginRequest;
 import org.example.api.domain.user.controller.model.req.UserRegisterRequest;
 import org.example.api.domain.user.controller.model.res.UserResponse;
 import org.example.api.domain.user.converter.UserConverter;
 import org.example.api.domain.user.service.UserService;
-import org.example.api.exceptionhandler.exception.ApiException;
 import org.example.db.user.UserEntity;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,6 +23,7 @@ import lombok.RequiredArgsConstructor;
 public class UserBusiness {
 	private final UserService userService;
 	private final UserConverter userConverter;
+	private final TokenBusiness tokenBusiness;
 
 	// 사용자에 대한 가입 처리 로직이 들어가야함
 	// 리퀘스트를 엔티티로 바꿔준다음에 리턴을 시킨다
@@ -49,11 +52,18 @@ public class UserBusiness {
 	* 3. 로그인 완료시 토큰 생성
 	* 4. token response
 	* */
-	public UserResponse login (UserLoginRequest request) {
+	public TokenResponse login (UserLoginRequest request) {
 		UserEntity userEntity = userService.login(request.getEmail(), request.getPassword());
 		// 위 로직에서 사용자가 없으면 throw
 		// 사용자가 있다면 토큰을 생성 시킨다.
-		return userConverter.toResponse(userEntity);
+		var tokenResponse = tokenBusiness.issueToken(userEntity);
+		return tokenResponse;
+	}
+
+	public UserResponse me(Long userId) {
+		var userEntity = userService.getUserWithThrow(userId);
+		var response = userConverter.toResponse(userEntity);
+		return response;
 	}
 
 }

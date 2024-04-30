@@ -4,7 +4,7 @@ import java.util.Optional;
 
 import org.example.api.common.error.ErrorCode;
 import org.example.api.common.error.UserErrorCode;
-import org.example.api.exceptionhandler.exception.ApiException;
+import org.example.api.common.exception.ApiException;
 import org.example.db.user.UserEntity;
 import org.example.db.user.UserRepository;
 import org.example.db.user.enums.UserStatus;
@@ -32,7 +32,7 @@ public class UserService {
 
 				return userRepository.save(userEntity);
 			})
-			.orElseThrow(() -> new ApiException(ErrorCode.NULL_POINT, "UserEntity Null"));
+			.orElseThrow(() -> new ApiException(ErrorCode.NULL_POINT));
 	}
 
 	// 사용자가 있을 때
@@ -43,10 +43,14 @@ public class UserService {
 	}
 
 	// 사용자가 없을 떄
-	@Transactional
 	public UserEntity getUserWithThrow (String email, String password) {
 		return userRepository.findFirstByEmailAndPasswordAndStatusOrderByIdDesc(email,password, UserStatus.REGISTERED)
-			.orElseThrow( () -> new ApiException(UserErrorCode.USER_NOT_FOUND, "User 가 없습니다"));
+			.orElseThrow( () -> new ApiException(UserErrorCode.USER_NOT_FOUND));
+	}
+
+	public UserEntity getUserWithThrow (Long userId) {
+		return userRepository.findFirstByIdAndStatusOrderByIdDesc(userId, UserStatus.REGISTERED)
+			.orElseThrow( () -> new ApiException(UserErrorCode.USER_NOT_FOUND));
 	}
 
 }

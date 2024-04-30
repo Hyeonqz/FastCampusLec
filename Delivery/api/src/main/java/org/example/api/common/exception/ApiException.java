@@ -1,45 +1,36 @@
 package org.example.api.common.exception;
 
-import org.example.api.common.error.ErrorCode;
-import org.example.api.common.error.ErrorCodeInterface;
+import org.example.api.common.error.ErrorCodeIfs;
 
-public class ApiException extends RuntimeException implements ApiExceptionIfs{
+import lombok.Getter;
 
-	private final ErrorCodeInterface errorCodeInterface;
-	private final String errorDescription;
+@Getter
+public class ApiException extends RuntimeException implements ApiExceptionIfs {
 
-	public ApiException(ErrorCodeInterface errorCodeInterface) {
-		super(errorCodeInterface.getDescription()); // 부모에게 Description 을 보낸다
-		this.errorCodeInterface = errorCodeInterface;
-		this.errorDescription = errorCodeInterface.getDescription();
-	}
+    private final ErrorCodeIfs errorCodeIfs;
+    private final String errorDescription;
 
-	public ApiException(ErrorCodeInterface errorCodeIfs, String errorDescription){
-		super(errorDescription);
-		this.errorCodeInterface = errorCodeIfs;
-		this.errorDescription = errorDescription;
-	}
+    public ApiException(ErrorCodeIfs errorCodeIfs){
+        super(errorCodeIfs.getDescription());
+        this.errorCodeIfs = errorCodeIfs;
+        this.errorDescription = errorCodeIfs.getDescription();
+    }
 
-	public ApiException(ErrorCodeInterface errorCodeIfs, Throwable tx){
-		super(tx);
-		this.errorCodeInterface = errorCodeIfs;
-		this.errorDescription = errorCodeIfs.getDescription();
-	}
+    public ApiException(ErrorCodeIfs errorCodeIfs, String errorDescription){
+        super(errorDescription);
+        this.errorCodeIfs = errorCodeIfs;
+        this.errorDescription = errorDescription;
+    }
 
-	public ApiException(ErrorCodeInterface errorCodeIfs, Throwable tx, String errorDescription){
-		super(tx);
-		this.errorCodeInterface = errorCodeIfs;
-		this.errorDescription = errorDescription;
-	}
+    public ApiException(ErrorCodeIfs errorCodeIfs, Throwable tx){
+        super(tx);
+        this.errorCodeIfs = errorCodeIfs;
+        this.errorDescription = errorCodeIfs.getDescription();
+    }
 
-	@Override
-	public ErrorCodeInterface getErrorCodeIfs () {
-		return null;
-	}
-
-	@Override
-	public String getErrorDescription () {
-		return "";
-	}
-
+    public ApiException(ErrorCodeIfs errorCodeIfs, Throwable tx, String errorDescription){
+        super(tx);
+        this.errorCodeIfs = errorCodeIfs;
+        this.errorDescription = errorDescription;
+    }
 }

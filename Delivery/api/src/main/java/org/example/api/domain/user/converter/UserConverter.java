@@ -4,9 +4,9 @@ import java.util.Optional;
 
 import org.example.api.common.annotation.Converter;
 import org.example.api.common.error.ErrorCode;
+import org.example.api.common.exception.ApiException;
 import org.example.api.domain.user.controller.model.req.UserRegisterRequest;
 import org.example.api.domain.user.controller.model.res.UserResponse;
-import org.example.api.exceptionhandler.exception.ApiException;
 import org.example.db.user.UserEntity;
 import org.example.db.user.enums.UserStatus;
 
