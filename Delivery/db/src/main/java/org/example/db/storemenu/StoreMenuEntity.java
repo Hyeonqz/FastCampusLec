@@ -37,4 +37,8 @@ public class StoreMenuEntity extends BaseEntity {
 	private String thumbnailUrl;
 	private Integer likeCount;
 	private Integer sequence;
+
+	public void setRegister () {
+		this.status = StoreMenuStatus.REGISTERED;
+	}
 }
