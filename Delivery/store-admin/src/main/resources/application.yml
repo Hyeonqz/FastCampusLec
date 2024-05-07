@@ -1,0 +1,30 @@
+server:
+  .port: 9002
+
+spring:
+  application:
+    name: store-admin
+  jpa:
+    show-sql: true
+    properties:
+        format_sql: true
+        dialect: org.hibernate.dialect.MySQL8Dialect
+    hibernate:
+      ddl-auto: validate
+      # validate 로 바꿔가면서 하기.
+      #개발 초기 단계 또는 로컬에서 테스트 : create 또는 update
+      #테스트 서버 : update 또는 validate
+      #스테이징 및 운영 서버 : validate 또는 none
+  datasource:
+    url: jdbc:mysql://localhost:3306/delivery?userSSL=false&useUnicode=true&allowPublicKeyRetrieval=true
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: 1234
+
+token:
+  secret:
+    key: SpringBootJWTHelperTokenSecretKeyValue123!@#
+  access-token:
+    plus-hour: 6
+  refresh-token:
+    plus-hour: 12
