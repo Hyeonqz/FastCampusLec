@@ -27,4 +27,8 @@ public class UserOrderMenuEntity extends BaseEntity {
 	@Enumerated(EnumType.STRING)
 	private UserOrderMenuStatus status;
 
+	public void setMenu() {
+		this.status = UserOrderMenuStatus.REGISTERED;
+	}
+
 }

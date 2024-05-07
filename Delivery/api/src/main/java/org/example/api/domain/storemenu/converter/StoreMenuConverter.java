@@ -1,5 +1,6 @@
 package org.example.api.domain.storemenu.converter;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.example.api.common.annotation.Converter;
@@ -43,5 +44,11 @@ public class StoreMenuConverter {
 					.build();
 			})
 			.orElseThrow(() -> new ApiException(ErrorCode.NULL_POINT, "StoreMenuEntity is Null"));
+	}
+
+	public List<StoreMenuResponse> toResponse(List<StoreMenuEntity> storeMenuEntities) {
+		return storeMenuEntities.stream()
+			.map(this::toResponse)// it -> toResponse(it)
+			.toList();
 	}
 }

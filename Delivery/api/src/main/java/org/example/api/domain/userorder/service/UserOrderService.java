@@ -17,6 +17,11 @@ import lombok.RequiredArgsConstructor;
 public class UserOrderService {
 	private final UserOrderRepository userOrderRepository;
 
+	public UserOrderEntity getUserOrderWithOutStatusWithThrow(Long id, Long userId) {
+		return userOrderRepository.findAllByIdAndUserId(id,userId)
+			.orElseThrow( () -> new ApiException(ErrorCode.NULL_POINT));
+	}
+
 	// 주문 내역 가져오기
 	public UserOrderEntity getUserOrderWithThrow(Long id, Long userId) {
 		return userOrderRepository.findAllByIdAndStatusAndUserId(id, UserOrderStatus.REGISTERED, userId)
