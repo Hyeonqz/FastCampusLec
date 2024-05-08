@@ -33,11 +33,11 @@ public class StoreEntity extends BaseEntity {
 	@Column(length = 150, nullable = false)
 	private String address;
 
-	@Column(length = 50)
+	@Column(columnDefinition = "varchar(50)")
 	@Enumerated(EnumType.STRING)
 	private StoreStatus status;
 
-	@Column(length = 50)
+	@Column(columnDefinition = "varchar(50)")
 	@Enumerated(EnumType.STRING)
 	private StoreCategory category;
 
@@ -56,10 +56,8 @@ public class StoreEntity extends BaseEntity {
 	@Column(length = 20)
 	private String phoneNumber;
 
-	@CreatedDate
 	private LocalDateTime createdAt;
 
-	@LastModifiedDate
 	private LocalDateTime updatedAt;
 
 	public void register() {

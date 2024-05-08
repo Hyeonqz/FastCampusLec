@@ -45,4 +45,11 @@ public class StoreUserEntity extends BaseEntity {
 	private LocalDateTime registeredAt;
 	private LocalDateTime unregisteredAt;
 	private LocalDateTime lastLoginAt;
+
+	public void preSetting () {
+		this.status = StoreUserStatus.REGISTERED;
+		this.password = password;
+		this.registeredAt = LocalDateTime.now();
+	}
+
 }

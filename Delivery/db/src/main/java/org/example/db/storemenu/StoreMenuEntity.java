@@ -30,7 +30,7 @@ public class StoreMenuEntity extends BaseEntity {
 	@Column(precision = 11, scale = 4, nullable = false)
 	private BigDecimal amount;
 
-	@Column(length = 50, nullable = false)
+	@Column(columnDefinition = "varchar(50)", nullable = false)
 	@Enumerated(EnumType.STRING)
 	private StoreMenuStatus status;
 	@Column(length = 200,nullable = false)

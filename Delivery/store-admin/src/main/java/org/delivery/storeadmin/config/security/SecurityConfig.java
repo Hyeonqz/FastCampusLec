@@ -8,6 +8,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
 @EnableWebSecurity // security 활성화
@@ -49,6 +51,15 @@ public class SecurityConfig {
 			.formLogin(Customizer.withDefaults()); // 폼 로그인은 디폴트로 나오게한다.
 
 		return httpSecurity.build();
+	}
+
+	// 스프링 시큐리티는 BCrypt 를 사용한다.
+	// 패스워드 Bean 으로 등록시키기
+	@Bean
+	public PasswordEncoder passwordEncoder() {
+		// Hash 방식으로 암호화를 하며, sort 까지해서 정렬까지 한 후 hash 로 저장을 함
+		// 디코딩은 불가능, 인코딩만 가능하다.
+		return new BCryptPasswordEncoder();
 	}
 
 }
