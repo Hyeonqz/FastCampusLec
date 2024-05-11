@@ -1,9 +1,9 @@
 package org.delivery.storeadmin.domain.authorization;
 
+import org.delivery.storeadmin.domain.authorization.model.UserSession;
 import org.delivery.storeadmin.domain.user.service.StoreUserService;
 import org.example.db.store.StoreRepository;
 import org.example.db.store.enums.StoreStatus;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -17,22 +17,22 @@ public class AuthorizationService implements UserDetailsService {
 
 	private final StoreUserService storeUserService;
 	private final StoreRepository storeRepository;
+
 	@Override
-	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+	public UserDetails loadUserByUsername (String username) throws UsernameNotFoundException {
 
 		var storeUserEntity = storeUserService.getRegisterUser(username);
 
 		var storeEntity = storeRepository.findFirstByIdAndStatusOrderByIdDesc(
-			storeUserEntity.get().getStoreId(),
-			StoreStatus.REGISTERED
-		);
+				storeUserEntity.get().getStoreId(), StoreStatus.REGISTERED);
 
-		return storeUserEntity.map(it ->{
+		return storeUserEntity.map(it -> {
+				// userDetail 수정한 객체 가져오기
 
-				var userSession = UserSession.builder()
+				return UserSession.builder()
 					.userId(it.getId())
-					.email(it.getEmail())
 					.password(it.getPassword())
+					.email(it.getEmail())
 					.status(it.getStatus())
 					.role(it.getRole())
 					.registeredAt(it.getRegisteredAt())
@@ -42,9 +42,8 @@ public class AuthorizationService implements UserDetailsService {
 					.storeId(storeEntity.get().getId())
 					.storeName(storeEntity.get().getName())
 					.build();
-
-				return userSession;
 			})
 			.orElseThrow(() -> new UsernameNotFoundException(username));
 	}
+
 }

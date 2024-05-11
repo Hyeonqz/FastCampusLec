@@ -1,7 +1,10 @@
 package org.example.db.store;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 import org.example.db.BaseEntity;
 import org.example.db.store.enums.StoreCategory;
@@ -22,10 +25,11 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 @AllArgsConstructor
 @SuperBuilder
-@EqualsAndHashCode
 @Getter
 @Entity(name="store")
-public class StoreEntity extends BaseEntity {
+public class StoreEntity extends BaseEntity implements Serializable {
+	@Serial
+	private static final long serialVersionUID = 1290471902750912L;
 
 	@Column(length = 100, nullable = false)
 	private String name;

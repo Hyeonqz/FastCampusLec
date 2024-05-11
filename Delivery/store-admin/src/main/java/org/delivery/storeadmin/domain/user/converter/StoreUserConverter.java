@@ -3,6 +3,7 @@ package org.delivery.storeadmin.domain.user.converter;
 import java.util.Optional;
 
 import org.delivery.storeadmin.common.annotation.Converter;
+import org.delivery.storeadmin.domain.authorization.model.UserSession;
 import org.delivery.storeadmin.domain.user.controller.model.StoreUserRegisterRequest;
 import org.delivery.storeadmin.domain.user.controller.model.StoreUserResponse;
 import org.example.db.store.StoreEntity;
@@ -43,6 +44,27 @@ public class StoreUserConverter {
 				.StoreResponse.builder()
 				.id(storeEntity.getId())
 				.name(storeEntity.getName())
+				.build())
+			.build();
+	}
+
+	// 로그인 된 사용자의 유저 데이터를 받아서, 리스폰스로 반환한다.
+	public StoreUserResponse toResponse (UserSession userSession) {
+		return StoreUserResponse.builder()
+			.user(StoreUserResponse
+				.UserReponse.builder()
+				.id(userSession.getUserId())
+				.email(userSession.getEmail())
+				.status(userSession.getStatus())
+				.role(userSession.getRole())
+				.registeredAt(userSession.getRegisteredAt())
+				.unregisteredAt(userSession.getUnregisteredAt())
+				.lastLoginAt(userSession.getLastLoginAt())
+				.build())
+			.store(StoreUserResponse
+				.StoreResponse.builder()
+				.id(userSession.getStoreId())
+				.name(userSession.getStoreName())
 				.build())
 			.build();
 	}
