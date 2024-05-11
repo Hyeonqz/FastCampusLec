@@ -1,0 +1,12 @@
+version: '3.7'
+services:
+  rabbitmq:
+    image: rabbitmq:latest
+    ports:
+      - "5672:5672" # rabbit amqp port 5672(rabbitmq):5672(docker port)
+      - "15672:15672" # manage port
+    environment:
+      - RABBITMQ_DEFAULT_USER=admin
+      - RABBITMQ_DEFAULT_PASS=admin123!@
+
+# rabbitmq-plugins enable rabbitmq_management -> rabbitmq 대쉬보드 보기 (Management 활성화 명령어) -> 관리자 모드
