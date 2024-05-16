@@ -9,4 +9,4 @@ services:
       - RABBITMQ_DEFAULT_USER=admin
       - RABBITMQ_DEFAULT_PASS=admin123!@
 
-# rabbitmq-plugins enable rabbitmq_management -> rabbitmq 대쉬보드 보기 (Management 활성화 명령어) -> 관리자 모드
+# Docker 터미널안에서 rabbitmq-plugins enable rabbitmq_management -> rabbitmq 대쉬보드 보기 (Management 활성화 명령어) -> 관리자 모드

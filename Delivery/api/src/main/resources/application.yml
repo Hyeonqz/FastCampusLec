@@ -2,6 +2,12 @@ server:
   .port: 9000
 
 spring:
+  rabbitmq: # connectionFactor 관리
+    host: localhost
+    port: 5672
+    username: admin
+    password: admin123!@
+
   jpa:
     show-sql: true
     properties:
