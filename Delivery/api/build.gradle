@@ -23,8 +23,8 @@ repositories {
 }
 
 dependencies {
-    ///// api 가 db 모듈을 가져다가 쓰겠다는 뜻
-    implementation project(':db')
+    implementation project(':db') // api 가 db 모듈을 가져다가 쓰겠다는 뜻
+    implementation project(':common') // api 모듈이 common 모듈을 가져다 쓰겠다는 뜻.
     implementation 'org.springframework.boot:spring-boot-starter-web'
     testImplementation 'org.springframework.security:spring-security-test'
     testImplementation 'org.springframework.amqp:spring-rabbit-test'
